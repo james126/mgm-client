@@ -17,7 +17,7 @@ describe('AppComponent', () => {
   it(`should have as title 'mgm-client'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('mgm-client');
+    expect(app.currentRoute).toEqual('mgm-client');
   });
 
   it('should render title', () => {

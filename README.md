@@ -25,3 +25,30 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## Debugging
+1. Open Intellij go 'Edit Configurations...'
+
+2. On Run/Debug Configuration page click  plus(+) button
+
+3. After click plus button select 'Javascript Debug' option and fill name and url (url must be the address of angular application)
+
+**Execute project and debug**
+
+1. First execute angular app with:
+
+`ng serve`
+
+2. After executing the angular app click configuration that created above and click debug button.
+
+3. You will see that new browser page is opened and debug mode is active.
+
+## ToDo
+Footer
+Index testimonials page
+Header about,contact,services links
+Animations - all pages
+
+31 - creating components at runtime
+when viewNext or delete is pressed
