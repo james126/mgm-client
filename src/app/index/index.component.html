@@ -321,8 +321,7 @@
 						<div class="bg-primary text-center p-5">
 							<h1 class="mb-4">Contact Us Now</h1>
 							<form class="needs-validation" id="contact-form"
-								  [formGroup]="contactForm"
-								  (submit)="onSubmit()">
+								  [formGroup]="contactForm">
 								<div class="row g-3">
 
 									<!-- first_name	-->
@@ -421,7 +420,7 @@
 									</div>
 
 									<div class="col-12">
-										<button class="btn btn-dark w-100 py-3" type="submit" id="submit-button" role="button">Submit</button>
+										<button class="btn btn-dark w-100 py-3" type="submit" id="submit-button" (click)="onSubmit()">Submit</button>
 									</div>
 								</div>
 							</form>

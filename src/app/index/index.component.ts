@@ -1,13 +1,15 @@
+import {HttpResponse} from "@angular/common/http";
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from "@angular/router";
 import {OwlOptions} from 'ngx-owl-carousel-o';
-import {ContactFormService} from "./http/contact-form.service";
-
+import {ContactFormService} from "./httpRequest/contact-form.service";
+import { Contact } from './contact';
 
 @Component({
 	selector: 'app-index',
-	templateUrl: './index.component.html'
+	templateUrl: './index.component.html',
+
 })
 export class IndexComponent implements OnInit {
 	service: ContactFormService;
@@ -87,12 +89,29 @@ export class IndexComponent implements OnInit {
 			document.getElementById("submit-button")?.blur();
 		}, 500);
 
-		if (this.contactForm.valid){
-			this.service.submitContactForm(this.formValues);
-			this.contactForm.reset();
-			this.submitted = false;
-			this.router.navigate(['/index']).catch(err => {console.log(err)});
+
+		if (this.contactForm.valid) {
+			const first_name: string = this.contactForm.get('first_name')!.value;
+			const last_name: string = this.contactForm.get('last_name')!.value;
+			const email: string = this.contactForm.get('email')!.value;
+			const phone: string = this.contactForm.get('phone')!.value;
+			const address_line1: string = this.contactForm.get('address_line1')!.value;
+			const address_line2: string = this.contactForm.get('address_line2')!.value;
+			const message: string = this.contactForm.get('message')!.value;
+			const contact = new Contact(first_name, last_name, email, phone, address_line1, address_line2, message);
+
+			console.log(contact);
+			this.service.submitContactForm(contact).subscribe((res) => {
+				this.resetForm()
+				console.log(res.status);
+			})
 		}
+	}
+
+	resetForm() {
+		this.contactForm.reset();
+		this.submitted = false;
+		this.router.navigate(['/index']).catch(err => {console.log(err)});
 	}
 
 	get first_name() {

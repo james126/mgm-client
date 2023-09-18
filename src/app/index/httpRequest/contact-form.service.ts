@@ -1,11 +1,10 @@
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {catchError, Observable, throwError} from "rxjs";
-
+import {catchError, filter, map, throwError} from "rxjs";
+import { environment } from '../../../environments/environment';
 @Injectable()
 export class ContactFormService {
-	private url1 = 'https://97492c13-d3a4-470c-87e6-ff23d3b77c9d.mock.pstmn.io/form'
-	private url = 'http://localhost:8080/form'
+	private url = environment.apiSubmitFormUrl;
 	constructor(private http: HttpClient) { }
 
 	// options: {
@@ -19,12 +18,10 @@ export class ContactFormService {
 	//get an observable of <any>
 
 	submitContactForm(formValues: object) {
-		this.http.post<any>(this.url, formValues, {
-			headers:  new HttpHeaders({'content-type': 'application/json'}),
-		}).pipe(catchError(this.handleError))
-		.subscribe((res) => {
-			console.log(res)
-		})
+		return this.http.post<any>(this.url, formValues, {
+			headers:  new HttpHeaders({'Content-Type': 'application/json'}),
+			observe: 'response',
+		}).pipe(catchError(this.handleError));
 	}
 
 	private handleError(error: HttpErrorResponse) {
