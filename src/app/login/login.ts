@@ -1,13 +1,12 @@
-import { InjectionToken } from '@angular/core';
-
-export interface Login {
+export class Login{
 	username: string;
 	password: string;
+
+	constructor(
+		username: string,
+		password: string,
+	){
+		this.username = username;
+		this.password = password;
+	}
 }
-
-export const defaultLogin: Login = {
-	username: "",
-	password: ""
-};
-
-export const DEFAULT_LOGIN = new InjectionToken<Login>('login');

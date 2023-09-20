@@ -1,15 +1,13 @@
-import {HttpResponse} from "@angular/common/http";
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from "@angular/router";
 import {OwlOptions} from 'ngx-owl-carousel-o';
-import {ContactFormService} from "./httpRequest/contact-form.service";
+import {ContactFormService} from "../httpRequest/contact-form.service";
 import { Contact } from './contact';
 
 @Component({
 	selector: 'app-index',
 	templateUrl: './index.component.html',
-
 })
 export class IndexComponent implements OnInit {
 	service: ContactFormService;
@@ -100,10 +98,9 @@ export class IndexComponent implements OnInit {
 			const message: string = this.contactForm.get('message')!.value;
 			const contact = new Contact(first_name, last_name, email, phone, address_line1, address_line2, message);
 
-			console.log(contact);
 			this.service.submitContactForm(contact).subscribe((res) => {
 				this.resetForm()
-				console.log(res.status);
+				console.log('Submitted contact form, status:' + res.status);
 			})
 		}
 	}

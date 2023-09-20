@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {ExtraOptions, RouterModule, Routes} from '@angular/router';
-import {HeaderRoutingModule} from "./shared/header/header.routing.module";
+import {HeaderRoutingModule} from "./header/header.routing.module";
 
 
 const routes: Routes = [

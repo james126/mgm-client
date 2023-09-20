@@ -1,4 +1,5 @@
 export const environment = {
 	production: false,
-	apiSubmitFormUrl: 'http://localhost:8080/form'
+	apiForm: 'http://localhost:8080/form',
+	apiLogin: 'http://localhost:8080/login'
 };

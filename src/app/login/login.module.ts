@@ -1,7 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {RouterLink} from "@angular/router";
+import {LoginFormService} from "../httpRequest/login-form.service";
 import {LoginComponent} from "./login.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
 	declarations: [
@@ -9,11 +11,14 @@ import {FormsModule} from "@angular/forms";
 	],
 	imports: [
 		CommonModule,
-		FormsModule
+		FormsModule,
+		RouterLink,
+		ReactiveFormsModule
 	],
 	exports: [
 		LoginComponent
-	]
+	],
+	providers:[LoginFormService]
 })
 export class LoginModule {
 }

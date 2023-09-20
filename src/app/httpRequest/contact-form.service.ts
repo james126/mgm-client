@@ -1,10 +1,11 @@
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {catchError, filter, map, throwError} from "rxjs";
-import { environment } from '../../../environments/environment';
+import { environment } from '../../environments/environment';
+
 @Injectable()
 export class ContactFormService {
-	private url = environment.apiSubmitFormUrl;
+	private url = environment.apiForm;
 	constructor(private http: HttpClient) { }
 
 	// options: {
