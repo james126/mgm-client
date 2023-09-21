@@ -1,145 +1,136 @@
-<div id="page-container" onload="updateOnLoad()">
-	<div id="content-wrap">
-		<!-- Spinner Start -->
-		<div id="spinner"
-			 class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-			<div class="spinner-grow text-primary" role="status"></div>
-		</div>
-		<!-- Spinner End -->
+<div class="container">
+	<div class="row justify-content-center mb-5">
+		<div class="col-lg-8 mb-0">
+			<div class="text-left" style="max-width: 500px;">
+				<h6 class="text-primary text-uppercase">Contact Enquiries</h6>
+				<p class="mb-4">View and delete enquiries</p>
+			</div>
+
+			<div class="bg-primary text-center p-5">
+				<h1 class="mb-4">Contact</h1>
 
 
-		<div class="container">
-			<div class="row justify-content-center mb-5">
-				<div class="col-lg-8 mb-0">
+			    <!-- Form start-->
+				<form class="needs-validation" id="contact-form" novalidate>
+					<div class="row g-3">
 
-					<div class="text-left" style="max-width: 500px;">
-						<h6 class="text-primary text-uppercase">Contact Enquiries</h6>
-						<p class="mb-4">View and delete enquiries</p>
-					</div>
 
-					<div class="bg-primary text-center p-5">
-						<h1 class="mb-4">Contact</h1>
-						<!-- forms -->
-						<!-- 'novalidate' disables browser validate check (bootstrap to validate)
-							  action = where form data is submitted
-							  method = post data to web server -->
-						<!--						<form class="needs-validation" id="contact-form" novalidate-->
-						<!--							  onsubmit="return false;"-->
-						<!--							  th:attr="data-id=${id}"-->
-						<!--							  th:object="${contact}">-->
-						<form class="needs-validation" id="contact-form" novalidate>
-<!--							  onsubmit="return false;"-->
-<!--							  th:attr="data-id=${id}"-->
-<!--							  th:object="${contact}">-->
-							<div class="row g-3">
-								<div class="col-sm-6">
-									<div class="form-floating">
-										<!--										<input type="text" class="form-control border-0" id="first_name" name="first_name"-->
-										<!--											   placeholder="First Name" th:field="*{first_name}" disabled>-->
-										<input type="text" class="form-control border-0" id="first_name"
-											   name="first_name"
-											   placeholder="First Name" disabled>
-										<label for="first_name">First Name</label>
-										<div class="invalid-feedback">Please enter first name</div>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-floating">
-										<!--										<input type="text" class="form-control border-0" id="last_name" name="last_name"-->
-										<!--											   placeholder="Last Name" th:field="*{last_name}" disabled>-->
-										<input type="text" class="form-control border-0" id="last_name" name="last_name"
-											   placeholder="Last Name" disabled>
-										<label for="last_name">Last Name</label>
-										<div class="invalid-feedback">Please enter last name</div>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-floating">
-										<!--										<input type="email" class="form-control border-0" id="email" placeholder="Email"-->
-										<!--											   th:field="*{email}" disabled>-->
-										<input type="email" class="form-control border-0" id="email" placeholder="Email"
-											   disabled>
-										<label for="email">Your Email</label>
-										<div class="invalid-feedback">Please enter email</div>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-floating">
-										<!--										<input type="tel" class="form-control border-0" id="phone" placeholder="Phone"-->
-										<!--											   th:field="*{phone}" disabled>-->
-										<input type="tel" class="form-control border-0" id="phone" placeholder="Phone"
-											   disabled>
-										<label for="phone">Phone</label>
-										<div class="invalid-feedback">Please enter phone</div>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-floating">
-										<!--										<input type="text" class="form-control border-0" id="address_line1"-->
-										<!--											   placeholder="Address Line 1" th:field="*{address_line1}" disabled>-->
-										<input type="text" class="form-control border-0" id="address_line1"
-											   placeholder="Address Line 1"
-											   disabled>
-										<label for="address_line1">Number and road</label>
-										<div class="invalid-feedback">Please enter number and road</div>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-floating">
-										<!--										<input type="text" class="form-control border-0" id="address_line2"-->
-										<!--											   placeholder="Address Line 2" th:field="*{address_line2}" disabled>-->
-										<input type="text" class="form-control border-0" id="address_line2"
-											   placeholder="Address Line 2" disabled>
-										<label for="address_line2">Suburb</label>
-										<div class="invalid-feedback">Please enter suburb</div>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-floating">
-										<input type="text" class="form-control border-0" id="city" placeholder="City"
-											   disabled>
-										<label for="city" id="city-label">Auckland</label>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-floating">
-										<input type="text" class="form-control border-0" id="country"
-											   placeholder="Country"
-											   disabled>
-										<label for="country" id="country-label">New Zealand</label>
-									</div>
-								</div>
-								<div class="col-12">
-									<div class="form-floating">
-										<!--                                        <textarea class="form-control border-0" placeholder="Leave a message here" id="message"-->
-										<!--												  name="message" th:field="*{message}" disabled></textarea>-->
-										<textarea class="form-control border-0" placeholder="Leave a message here"
-												  id="message"
-												  name="message" disabled></textarea>
-										<label for="message">Message</label>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-floating">
-										<button class="btn btn-dark w-100 py-3" type="button" onclick="viewNext()"
-												id="view-next-button">View next
-										</button>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-floating">
-										<button class="btn btn-dark w-100 py-3" type="button" onclick="deleteForm()"
-												id="delete-button">Delete
-										</button>
-									</div>
-								</div>
+						<div class="col-sm-6">
+							<div class="form-floating">
+								<input type="text" class="form-control border-0" id="first_name"
+									   name="first_name"
+									   placeholder="First Name" disabled>
+								<label for="first_name">First Name</label>
+								<div class="invalid-feedback">Please enter first name</div>
 							</div>
-						</form>
+						</div>
+
+
+						<div class="col-sm-6">
+							<div class="form-floating">
+								<input type="text" class="form-control border-0" id="last_name" name="last_name"
+									   placeholder="Last Name" disabled>
+								<label for="last_name">Last Name</label>
+								<div class="invalid-feedback">Please enter last name</div>
+							</div>
+						</div>
+
+
+						<div class="col-sm-6">
+							<div class="form-floating">
+								<input type="email" class="form-control border-0" id="email" placeholder="Email"
+									   disabled>
+								<label for="email">Your Email</label>
+								<div class="invalid-feedback">Please enter email</div>
+							</div>
+						</div>
+
+
+						<div class="col-sm-6">
+							<div class="form-floating">
+								<input type="tel" class="form-control border-0" id="phone" placeholder="Phone"
+									   disabled>
+								<label for="phone">Phone</label>
+								<div class="invalid-feedback">Please enter phone</div>
+							</div>
+						</div>
+
+
+						<div class="col-sm-6">
+							<div class="form-floating">
+								<input type="text" class="form-control border-0" id="address_line1"
+									   placeholder="Address Line 1"
+									   disabled>
+								<label for="address_line1">Number and road</label>
+								<div class="invalid-feedback">Please enter number and road</div>
+							</div>
+						</div>
+
+
+						<div class="col-sm-6">
+							<div class="form-floating">
+								<input type="text" class="form-control border-0" id="address_line2"
+									   placeholder="Address Line 2" disabled>
+								<label for="address_line2">Suburb</label>
+								<div class="invalid-feedback">Please enter suburb</div>
+							</div>
+						</div>
+
+
+						<div class="col-sm-6">
+							<div class="form-floating">
+								<input type="text" class="form-control border-0" id="city" placeholder="City"
+									   disabled>
+								<label for="city" id="city-label">Auckland</label>
+							</div>
+						</div>
+
+
+						<div class="col-sm-6">
+							<div class="form-floating">
+								<input type="text" class="form-control border-0" id="country"
+									   placeholder="Country"
+									   disabled>
+								<label for="country" id="country-label">New Zealand</label>
+							</div>
+						</div>
+
+
+						<div class="col-12">
+							<div class="form-floating">
+								<textarea class="form-control border-0" placeholder="Leave a message here"
+										  id="message"
+										  name="message" disabled></textarea>
+								<label for="message">Message</label>
+							</div>
+						</div>
+
+
+						<div class="col-sm-6">
+							<div class="form-floating">
+								<button class="btn btn-dark w-100 py-3" type="button" onclick="viewNext()"
+										id="view-next-button">View next
+								</button>
+							</div>
+						</div>
+
+
+						<div class="col-sm-6">
+							<div class="form-floating">
+								<button class="btn btn-dark w-100 py-3" type="button" onclick="deleteForm()"
+										id="delete-button">Delete
+								</button>
+							</div>
+						</div>
 					</div>
-				</div>
+				</form>
+				<!-- Form end-->
+
+
 			</div>
 		</div>
 	</div>
 </div>
+
 
 

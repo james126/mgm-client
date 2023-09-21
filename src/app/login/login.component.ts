@@ -1,6 +1,7 @@
 
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 import {LoginFormService} from "../httpRequest/login-form.service";
 import {Login} from "./login";
 
@@ -10,14 +11,16 @@ import {Login} from "./login";
 	styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit{
-	service: LoginFormService;
+	router!: Router;
+	service!: LoginFormService;
 	loginForm!: FormGroup;
 	formValues = {username: '', password: ''};
 	submitted: boolean = false;
 	invalidCredentials: boolean = false;
 
-	constructor(service: LoginFormService) {
+	constructor(service: LoginFormService,  router: Router) {
 		this.service = service;
+		this.router = router;
 	}
 
 	ngOnInit(): void {
@@ -33,6 +36,14 @@ export class LoginComponent implements OnInit{
 		});
 	}
 
+	get username() {
+		return this.loginForm.get('username');
+	}
+
+	get password() {
+		return this.loginForm.get('password');
+	}
+
 	onSubmit(){
 		this.submitted = true;
 
@@ -45,32 +56,13 @@ export class LoginComponent implements OnInit{
 			const password: string = this.loginForm.get('password')!.value;
 			const login = new Login(username, password);
 
-			const myObserver = {
-				next: (x: number) => console.log('Observer got a next value: ' + x),
-				error: (err: Error) => console.error('Observer got an error: ' + err),
-				complete: () => console.log('Observer got a complete notification'),
-			};
-
-			this.service.submitLoginForm(login)
-				.subscribe({
-				next: result => {
-					console.log("successful " + result);
-				},
-				error: error => {
-					console.log(error.status)
-					this.submitted = true;
-					this.invalidCredentials = true;
-				}
-			})
+			const res = this.service.submitLoginForm(login)
+			if (!res){
+				this.submitted = true;
+				this.invalidCredentials = true;
+			} else {
+				this.router.navigateByUrl('/admin');
+			}
 		}
-	}
-
-
-	get username() {
-		return this.loginForm.get('username');
-	}
-
-	get password() {
-		return this.loginForm.get('password');
 	}
 }

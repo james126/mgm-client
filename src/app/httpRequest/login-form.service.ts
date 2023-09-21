@@ -1,12 +1,20 @@
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {Contact} from "./contact";
 
 @Injectable()
 export class LoginFormService {
 	private url = environment.apiLogin;
+	private _contact!: Contact | undefined;
+
+	get contact(): Contact | undefined {
+		return this._contact;
+	}
+
+	set contact(value: Contact | undefined) {
+		this._contact = value;
+	}
 
 	constructor(private http: HttpClient) {
 	}
@@ -21,17 +29,29 @@ export class LoginFormService {
 	// }
 	//get an observable of <any>
 
-	submitLoginForm(formValues: object): Observable<HttpResponse<object>> {
-		// return this.http.post<Contact>(this.url, formValues, {
-		// 	headers: new HttpHeaders({'Content-Type': 'application/json'}),
-		// 	observe: 'response',
-		// 	responseType: 'json'
-		// })
+	submitLoginForm(formValues: object)  {
+		let res = true;
 
-		return this.http.post<any>(this.url, formValues, {
-			headers: new HttpHeaders({'Content-Type': 'application/json'}),
-			observe: 'response',
-			responseType: 'json'
+		this.http.post<Contact>(this.url, formValues, {
+			headers: new HttpHeaders({'Content-Type': 'application/json'})
+		}).subscribe({
+			next: (result) => {
+				this.contact = new Contact();
+				this.contact.id = result.id;
+				this.contact.first_name = result.first_name;
+				this.contact.last_name = result.last_name;
+				this.contact.address_line1 = result.address_line1;
+				this.contact.address_line2 = result.address_line2;
+				this.contact.message = result.message;
+				console.log('Login successful');
+			},
+			error: (error) => {
+				res = false;
+				console.log('Login unsuccessful: ' + error.status);
+			}
 		})
+
+		return res;
 	}
 }
+
