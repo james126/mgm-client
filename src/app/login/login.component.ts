@@ -1,8 +1,10 @@
-
+import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {LoginFormService} from "../httpRequest/login-form.service";
+import {catchError, map, throwError} from "rxjs";
+import {environment} from "../../environments/environment";
+import {Contact} from "../httpRequest/contact";
 import {Login} from "./login";
 
 @Component({
@@ -10,16 +12,16 @@ import {Login} from "./login";
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
+	private apiLogin = environment.apiLogin;
 	router!: Router;
-	service!: LoginFormService;
 	loginForm!: FormGroup;
 	formValues = {username: '', password: ''};
 	submitted: boolean = false;
 	invalidCredentials: boolean = false;
+	contact!: Contact
 
-	constructor(service: LoginFormService,  router: Router) {
-		this.service = service;
+	constructor(router: Router, private http: HttpClient) {
 		this.router = router;
 	}
 
@@ -44,9 +46,7 @@ export class LoginComponent implements OnInit{
 		return this.loginForm.get('password');
 	}
 
-	onSubmit(){
-		this.submitted = true;
-
+	onSubmit() {
 		setTimeout(() => {
 			document.getElementById("submit-button")?.blur();
 		}, 500);
@@ -56,13 +56,30 @@ export class LoginComponent implements OnInit{
 			const password: string = this.loginForm.get('password')!.value;
 			const login = new Login(username, password);
 
-			const res = this.service.submitLoginForm(login)
-			if (!res){
-				this.submitted = true;
-				this.invalidCredentials = true;
-			} else {
-				this.router.navigateByUrl('/admin');
-			}
+			this.http.post<Contact>(this.apiLogin, login, {
+				observe: 'response',
+				withCredentials: true
+			}).pipe(map((res: HttpResponse<Contact>) => {
+						this.contact = new Contact();
+						this.contact.id = res.body?.id;
+						this.contact.first_name = res.body?.first_name;
+						this.contact.last_name = res.body?.last_name;
+						this.contact.address_line1 = res.body?.address_line1;
+						this.contact.address_line2 = res.body?.address_line2;
+						this.contact.message = res.body?.message;
+					console.log('Login successful ' + res.status);
+					this.router.navigateByUrl('/admin', { state : this.contact});
+					}
+				), catchError((error: HttpErrorResponse) => {
+					return throwError(() => new Error(error.status.toString()));
+				})
+			).subscribe({
+					error: (error) => {
+					console.log('Login unsuccessful: ' + error);
+					this.submitted = true;
+					this.invalidCredentials = true;
+				}
+			})
 		}
 	}
 }

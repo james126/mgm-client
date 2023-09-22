@@ -17,9 +17,8 @@
 
 						<div class="col-sm-6">
 							<div class="form-floating">
-								<input type="text" class="form-control border-0" id="first_name"
-									   name="first_name"
-									   placeholder="First Name" disabled>
+								<input type="text" class="form-control border-0" id="first_name" name="first_name" placeholder="First Name" disabled
+										[value]=contact.first_name>
 								<label for="first_name">First Name</label>
 								<div class="invalid-feedback">Please enter first name</div>
 							</div>
@@ -28,8 +27,8 @@
 
 						<div class="col-sm-6">
 							<div class="form-floating">
-								<input type="text" class="form-control border-0" id="last_name" name="last_name"
-									   placeholder="Last Name" disabled>
+								<input type="text" class="form-control border-0" id="last_name" name="last_name" placeholder="Last Name" disabled
+									   [value]="contact.last_name">
 								<label for="last_name">Last Name</label>
 								<div class="invalid-feedback">Please enter last name</div>
 							</div>
@@ -38,8 +37,8 @@
 
 						<div class="col-sm-6">
 							<div class="form-floating">
-								<input type="email" class="form-control border-0" id="email" placeholder="Email"
-									   disabled>
+								<input type="email" class="form-control border-0" id="email" placeholder="Email" disabled
+									   [value]="contact.email">
 								<label for="email">Your Email</label>
 								<div class="invalid-feedback">Please enter email</div>
 							</div>
@@ -48,8 +47,8 @@
 
 						<div class="col-sm-6">
 							<div class="form-floating">
-								<input type="tel" class="form-control border-0" id="phone" placeholder="Phone"
-									   disabled>
+								<input type="tel" class="form-control border-0" id="phone" placeholder="Phone" disabled
+									   [value]="contact.phone">
 								<label for="phone">Phone</label>
 								<div class="invalid-feedback">Please enter phone</div>
 							</div>
@@ -58,9 +57,8 @@
 
 						<div class="col-sm-6">
 							<div class="form-floating">
-								<input type="text" class="form-control border-0" id="address_line1"
-									   placeholder="Address Line 1"
-									   disabled>
+								<input type="text" class="form-control border-0" id="address_line1" placeholder="Address Line 1" disabled
+									   [value]="contact.address_line1">
 								<label for="address_line1">Number and road</label>
 								<div class="invalid-feedback">Please enter number and road</div>
 							</div>
@@ -69,8 +67,8 @@
 
 						<div class="col-sm-6">
 							<div class="form-floating">
-								<input type="text" class="form-control border-0" id="address_line2"
-									   placeholder="Address Line 2" disabled>
+								<input type="text" class="form-control border-0" id="address_line2" placeholder="Address Line 2" disabled
+									   [value]="contact.address_line2">
 								<label for="address_line2">Suburb</label>
 								<div class="invalid-feedback">Please enter suburb</div>
 							</div>
@@ -79,18 +77,13 @@
 
 						<div class="col-sm-6">
 							<div class="form-floating">
-								<input type="text" class="form-control border-0" id="city" placeholder="City"
-									   disabled>
+								<input type="text" class="form-control border-0" id="city" placeholder="City" disabled>
 								<label for="city" id="city-label">Auckland</label>
 							</div>
 						</div>
-
-
 						<div class="col-sm-6">
 							<div class="form-floating">
-								<input type="text" class="form-control border-0" id="country"
-									   placeholder="Country"
-									   disabled>
+								<input type="text" class="form-control border-0" id="country" placeholder="Country" disabled>
 								<label for="country" id="country-label">New Zealand</label>
 							</div>
 						</div>
@@ -98,9 +91,8 @@
 
 						<div class="col-12">
 							<div class="form-floating">
-								<textarea class="form-control border-0" placeholder="Leave a message here"
-										  id="message"
-										  name="message" disabled></textarea>
+								<textarea class="form-control border-0" placeholder="Leave a message here" id="message" name="message" disabled
+								[value]="contact.message"></textarea>
 								<label for="message">Message</label>
 							</div>
 						</div>
@@ -108,7 +100,7 @@
 
 						<div class="col-sm-6">
 							<div class="form-floating">
-								<button class="btn btn-dark w-100 py-3" type="button" onclick="viewNext()"
+								<button class="btn btn-dark w-100 py-3" type="button" (click)="viewNext()"
 										id="view-next-button">View next
 								</button>
 							</div>
