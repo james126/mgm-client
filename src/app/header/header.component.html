@@ -20,7 +20,7 @@
 
         <!-- Far right header button -->
         <div *ngIf="title.slice(0,5) == 'index' || title == 'login'; else logged_in">
-            <a routerLink="/index"
+			<a routerLink="/index"
                 fragment="contact"
                 class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
                 Get Started
@@ -29,8 +29,8 @@
             </a>
         </div>
         <ng-template #logged_in>
-            <div *ngIf="title.slice(0,5) != 'index';">
-                <a routerLink="/index"
+            <div *ngIf="title.slice(0,5) == 'admin';">
+                <a (click)="logout()"
                    class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
                     Log Out
                     <i class="fa fa-arrow-right ms-3">
@@ -38,7 +38,6 @@
                 </a>
             </div>
         </ng-template>
-
     </div>
 </nav>
 

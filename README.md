@@ -12,12 +12,13 @@ Front-end Angular client app
 ## Backlog
 - [x] Custom authentication
 - [x] Custom authorisation
-- [ ] On login redirect to admin page
-- [ ] On login receive JWT cookie
-- [ ] On login load server objects into page
-- [ ] View next form http request to sever and handling
-- [ ] Delete form http request to sever and handling
+- [x] On login redirect to admin page
+- [x] On login receive JWT cookie
+- [x] On login load server objects into page
+- [x] View next form http request to sever and handling
+- [x] Delete form http request to sever and handling
 - [ ] Logout functionality
+- [ ] Logging to replace console.log statements
 - [ ] unit testing
 - [ ] deploy online
   <br/>

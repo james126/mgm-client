@@ -2,9 +2,11 @@ import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http"
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {NGXLogger} from "ngx-logger";
 import {catchError, map, throwError} from "rxjs";
 import {environment} from "../../environments/environment";
-import {Contact} from "../httpRequest/contact";
+import {BodyParserService} from "../http/body-parser.service";
+import {Contact} from "../http/contact";
 import {Login} from "./login";
 
 @Component({
@@ -14,15 +16,17 @@ import {Login} from "./login";
 })
 export class LoginComponent implements OnInit {
 	private apiLogin = environment.apiLogin;
-	router!: Router;
+	router: Router;
 	loginForm!: FormGroup;
 	formValues = {username: '', password: ''};
 	submitted: boolean = false;
 	invalidCredentials: boolean = false;
 	contact!: Contact
+	bodyParserService: BodyParserService
 
-	constructor(router: Router, private http: HttpClient) {
+	constructor(router: Router, private http: HttpClient, bodyParserService: BodyParserService, private logger: NGXLogger) {
 		this.router = router;
+		this.bodyParserService = bodyParserService;
 	}
 
 	ngOnInit(): void {
@@ -49,7 +53,7 @@ export class LoginComponent implements OnInit {
 	onSubmit() {
 		setTimeout(() => {
 			document.getElementById("submit-button")?.blur();
-		}, 500);
+		}, 1000);
 
 		if (this.loginForm.valid) {
 			const username: string = this.loginForm.get('username')!.value;
@@ -60,14 +64,8 @@ export class LoginComponent implements OnInit {
 				observe: 'response',
 				withCredentials: true
 			}).pipe(map((res: HttpResponse<Contact>) => {
-						this.contact = new Contact();
-						this.contact.id = res.body?.id;
-						this.contact.first_name = res.body?.first_name;
-						this.contact.last_name = res.body?.last_name;
-						this.contact.address_line1 = res.body?.address_line1;
-						this.contact.address_line2 = res.body?.address_line2;
-						this.contact.message = res.body?.message;
-					console.log('Login successful ' + res.status);
+					this.contact = this.bodyParserService.processResponseBody(res);
+					this.logger.info('Login successful ' + res.status);
 					this.router.navigateByUrl('/admin', { state : this.contact});
 					}
 				), catchError((error: HttpErrorResponse) => {
@@ -82,4 +80,5 @@ export class LoginComponent implements OnInit {
 			})
 		}
 	}
+
 }

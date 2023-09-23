@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from "@angular/router";
+import {NGXLogger} from "ngx-logger";
 import {OwlOptions} from 'ngx-owl-carousel-o';
-import {ContactFormService} from "../httpRequest/contact-form.service";
+import {ContactFormService} from "../http/contact-form.service";
 import { Contact } from './contact';
 
 @Component({
@@ -41,7 +42,7 @@ export class IndexComponent implements OnInit {
 		}
 	}
 
-	constructor(service: ContactFormService, router: Router) {
+	constructor(service: ContactFormService, router: Router, private logger: NGXLogger) {
 		this.service = service;
 		this.router = router;
 	}
@@ -100,7 +101,7 @@ export class IndexComponent implements OnInit {
 
 			this.service.submitContactForm(contact).subscribe((res) => {
 				this.resetForm()
-				console.log('Submitted contact form, status:' + res.status);
+				this.logger.info('Submitted contact form, status:' + res.status);
 			})
 		}
 	}
