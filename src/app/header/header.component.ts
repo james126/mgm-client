@@ -1,40 +1,100 @@
-import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
+
 import {Component, Input} from '@angular/core';
 import {Router} from "@angular/router";
-import {NGXLogger} from "ngx-logger";
-import {catchError, map, throwError} from "rxjs";
-import {environment} from "../../environments/environment";
+import {LogoutService} from "./service/logout.service";
 
 @Component({
-	selector: 'app-header',
-	templateUrl: './header.component.html',
-	styleUrls: ['./header.component.css']
+	selector: 'mgm-header',
+	templateUrl: './header.component.html'
 })
 export class HeaderComponent {
-	private apiLogout = environment.apiLogout;
-	@Input() title: String = 'index';
-	ids: Array<String> = ['about', 'services', 'contact']
+	@Input() currentRoute: String = '';
+	logoutService: LogoutService
 	router: Router;
 
-	constructor(router: Router, private http: HttpClient, private logger: NGXLogger) {
+	constructor(router: Router, logoutService: LogoutService) {
 		this.router = router;
+		this.logoutService = logoutService;
 	}
 
 	logout() {
-		this.http.get(this.apiLogout, {
-			observe: 'response',
-			withCredentials: true
-		}).pipe(map((res: HttpResponse<any>) => {
-					this.logger.info('Logout successful ' + res.status);
-					this.router.navigateByUrl('/');
-				}
-			), catchError((error: HttpErrorResponse) => {
-				return throwError(() => new Error(error.status.toString()));
-			})
-		).subscribe({
-			error: (error) => {
-				this.logger.error('Logout error: ' + error);
-			}
+		this.logoutService.logout().subscribe({
+			next: (data) => {
+				this.router.navigate(["/"], { skipLocationChange: true });
+			},
+			error: (err) => { }
 		})
+	}
+
+	getLogoClass(){
+		switch(this.currentRoute) {
+			case "admin": {
+				return "navbar-brand d-flex align-items-center px-4 px-lg-5k";
+			}
+			default : {
+				return "navbar-brand d-flex align-items-center border-end px-4 px-lg-5";
+			}
+		}
+	}
+
+	getHomeClass(){
+		switch(this.currentRoute) {
+			case "admin": {
+				return "nav-item nav-link disabled"
+			}
+			case "login": {
+				return "nav-item nav-link"
+			}
+			default : {
+				return "nav-item nav-link active"
+			}
+		}
+	}
+
+	getFragmentClass(){
+		switch(this.currentRoute) {
+			case "admin": {
+				return "nav-item nav-link disabled"
+			}
+			default : {
+				return "nav-item nav-link"
+			}
+		}
+	}
+
+	getLoginClass(){
+		switch(this.currentRoute) {
+			case "login": {
+				return "nav-item nav-link active"
+			}
+			case "admin": {
+				return "nav-item nav-link disabled"
+			}
+			default : {
+				return "nav-item nav-link"
+			}
+		}
+	}
+
+	getLoginText() {
+		switch(this.currentRoute) {
+			case "admin": {
+				return "Logged in"
+			}
+			default : {
+				return "Login"
+			}
+		}
+	}
+
+	isLoggedOut(){
+		switch(this.currentRoute) {
+			case "admin": {
+				return false;
+			}
+			default : {
+				return true;
+			}
+		}
 	}
 }

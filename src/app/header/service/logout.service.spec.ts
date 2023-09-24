@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { BodyParserService } from './body-parser.service';
+import { LogoutService } from './logout.service';
 
-describe('BodyParserService', () => {
-  let service: BodyParserService;
+describe('LogoutService', () => {
+  let service: LogoutService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(BodyParserService);
+    service = TestBed.inject(LogoutService);
   });
 
   it('should be created', () => {

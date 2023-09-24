@@ -22,7 +22,7 @@
 								<div class="form-floating">
 									<input type="text" class="form-control border-0" id="username" name="username" placeholder="Username" maxlength="50"
 										   formControlName="username"
-										   [ngClass]="username?.errors && submitted || password?.errors && submitted || submitted && ([invalidCredentials]) ? 'form-control border-0 is-invalid' : 'form-control border-0'">
+										   [ngClass]="username?.errors && submitted || submitted && invalidCredentials ? 'form-control border-0 is-invalid' : 'form-control border-0'">
 									<label for="username">UserName</label>
 									<div class="invalid-feedback">enter a valid username</div>
 								</div>
@@ -32,7 +32,7 @@
 								<div class="form-floating">
 									<input type="password" class="form-control border-0" id="password" name="password" placeholder="Password" maxlength="50"
 										   formControlName="password"
-										   [ngClass]="password?.errors && submitted || username?.errors && submitted || submitted && ([invalidCredentials]) ? 'form-control border-0 is-invalid' : 'form-control border-0'">
+										   [ngClass]="password?.errors && submitted || submitted && invalidCredentials ? 'form-control border-0 is-invalid' : 'form-control border-0'">
 									<label for="password">Password</label>
 									<div class="invalid-feedback">enter a valid password</div>
 								</div>

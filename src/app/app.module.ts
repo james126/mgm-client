@@ -7,8 +7,9 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {FooterModule} from "./footer/footer.module";
 import {HeaderModule} from "./header/header.module";
-import {HeaderRoutingModule} from "./header/header.routing.module";
-import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import {LoggerModule, NgxLoggerLevel, TOKEN_LOGGER_SERVER_SERVICE} from 'ngx-logger';
+import { APP_BASE_HREF } from '@angular/common';
+import {ServerCustomisedService} from "./utility/ServerCustomisedService";
 
 @NgModule({
 	declarations: [
@@ -17,19 +18,27 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
-		HeaderRoutingModule,
 		AppRoutingModule,
 		HeaderModule,
 		FooterModule,
 		HttpClientModule,
-		LoggerModule.forRoot({
+		LoggerModule.forRoot(
+			{
 			serverLoggingUrl: `${environment.serverLoggingUrl}`,
 			level: NgxLoggerLevel.INFO,
 			serverLogLevel: NgxLoggerLevel.ERROR,
-			disableConsoleLogging: false
-		})
+			disableConsoleLogging: false,
+			withCredentials: true},
+			{
+			serverProvider: {
+				provide: TOKEN_LOGGER_SERVER_SERVICE, useClass: ServerCustomisedService
+			}}
+		)
 	],
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent],
+	//TODO - to change URL
+	// providers:[{provide: APP_BASE_HREF, useValue: '/mypath'}]
+	//also change <href> in index.html
 })
 export class AppModule {
 }

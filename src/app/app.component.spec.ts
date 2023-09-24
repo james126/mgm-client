@@ -1,29 +1,26 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { HeaderComponentStub } from 'src/test/header.component.stub';
+import { RouterOutletStub } from 'src/test/router-outlet.component.stub';
+import { FooterComponentStub } from 'src/test/footer.component.stub';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [RouterTestingModule],
-    declarations: [AppComponent]
+    declarations: [AppComponent, HeaderComponentStub, RouterOutletStub, FooterComponentStub],
+    providers: []
   }));
 
-  it('should create the app', () => {
+  it('create an instance of AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    const component = fixture.componentInstance;
+    expect(component).toBeTruthy();
   });
 
-  it(`should have as title 'mgm-client'`, () => {
+  it(`default route is 'index'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.currentRoute).toEqual('mgm-client');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('mgm-client app is running!');
+    const component = fixture.componentInstance;
+    expect(component.currentRoute).toEqual('index');
   });
 });

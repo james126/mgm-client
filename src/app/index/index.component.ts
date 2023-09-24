@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from "@angular/router";
-import {NGXLogger} from "ngx-logger";
 import {OwlOptions} from 'ngx-owl-carousel-o';
-import {ContactFormService} from "../http/contact-form.service";
-import { Contact } from './contact';
+import {ContactFormService} from "./service/contact-form.service";
+import { Contact } from '../admin/dto/contact';
 
 @Component({
-	selector: 'app-index',
+	selector: 'mgm-index',
 	templateUrl: './index.component.html',
+	providers: [ContactFormService]
 })
 export class IndexComponent implements OnInit {
 	service: ContactFormService;
@@ -42,7 +42,7 @@ export class IndexComponent implements OnInit {
 		}
 	}
 
-	constructor(service: ContactFormService, router: Router, private logger: NGXLogger) {
+	constructor(service: ContactFormService, router: Router) {
 		this.service = service;
 		this.router = router;
 	}
@@ -82,34 +82,35 @@ export class IndexComponent implements OnInit {
 	}
 
 	onSubmit() {
-		this.submitted = true;
 
 		setTimeout(() => {
 			document.getElementById("submit-button")?.blur();
 		}, 500);
 
-
 		if (this.contactForm.valid) {
-			const first_name: string = this.contactForm.get('first_name')!.value;
-			const last_name: string = this.contactForm.get('last_name')!.value;
-			const email: string = this.contactForm.get('email')!.value;
-			const phone: string = this.contactForm.get('phone')!.value;
-			const address_line1: string = this.contactForm.get('address_line1')!.value;
-			const address_line2: string = this.contactForm.get('address_line2')!.value;
-			const message: string = this.contactForm.get('message')!.value;
-			const contact = new Contact(first_name, last_name, email, phone, address_line1, address_line2, message);
+			const contact = new Contact();
+			contact.first_name = this.contactForm.get('first_name')!.value;
+			contact.last_name = this.contactForm.get('last_name')!.value;
+			contact.email = this.contactForm.get('email')!.value;
+			contact.phone = this.contactForm.get('phone')!.value;
+			contact.address_line1 = this.contactForm.get('address_line1')!.value;
+			contact.address_line2 = this.contactForm.get('address_line2')!.value;
+			contact.message = this.contactForm.get('message')!.value;
 
-			this.service.submitContactForm(contact).subscribe((res) => {
-				this.resetForm()
-				this.logger.info('Submitted contact form, status:' + res.status);
-			})
+			this.service.submitContactForm(contact).subscribe({
+				next: (data) => {
+					this.resetForm()
+				}, error: (err) => {
+					this.submitted = true;
+				}
+			});
 		}
 	}
 
 	resetForm() {
 		this.contactForm.reset();
 		this.submitted = false;
-		this.router.navigate(['/index']).catch(err => {console.log(err)});
+		this.router.navigate(['/index'], { skipLocationChange: true }).catch(err => {console.log(err)});
 	}
 
 	get first_name() {

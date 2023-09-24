@@ -8,7 +8,7 @@
 			"schematics": {},
 			"root": "",
 			"sourceRoot": "src",
-			"prefix": "app",
+			"prefix": "mgm",
 			"architect": {
 				"build": {
 					"builder": "@angular-devkit/build-angular:browser",
@@ -32,6 +32,13 @@
 					},
 					"configurations": {
 						"production": {
+							"optimization": {
+								"scripts": true,
+								"styles": {
+									"minify": true,
+									"inlineCritical": false
+								}
+							},
 							"budgets": [
 								{
 									"type": "initial",
@@ -74,7 +81,7 @@
 						}
 					},
 					"options": {
-						"port": 4201
+						"port": 4200
 					},
 					"defaultConfiguration": "development"
 				},

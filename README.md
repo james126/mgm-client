@@ -17,8 +17,8 @@ Front-end Angular client app
 - [x] On login load server objects into page
 - [x] View next form http request to sever and handling
 - [x] Delete form http request to sever and handling
-- [ ] Logout functionality
-- [ ] Logging to replace console.log statements
+- [x] Logout functionality
+- [x] Logging to replace console.log statements
 - [ ] unit testing
 - [ ] deploy online
   <br/>

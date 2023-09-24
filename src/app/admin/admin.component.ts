@@ -1,26 +1,28 @@
-import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
-import {NGXLogger} from "ngx-logger";
-import {catchError, map, throwError} from "rxjs";
-import {environment} from "../../environments/environment";
-import {BodyParserService} from "../http/body-parser.service";
-import {Contact} from "../http/contact";
+import {Contact} from "./dto/contact";
+import {DeleteService} from "./service/delete.service";
+import {ViewNextService} from "./service/view-next.service";
 
 @Component({
-	selector: 'app-admin',
+	selector: 'mgm-admin',
 	templateUrl: './admin.component.html',
-	styleUrls: ['./admin.component.css']
+	styles: [
+		`.border-end {
+			border-right: none !important;
+		}`
+	],
+	providers: [ViewNextService, DeleteService]
 })
 export class AdminComponent {
-	private apiViewNext = environment.apiViewNext;
-	private apiDelete = environment.apiDelete;
 	contact: Contact
-	bodyParserService: BodyParserService
+	viewNextService: ViewNextService
+	deleteService: DeleteService
 
-	constructor(router: Router, private http: HttpClient, bodyParserService: BodyParserService, private logger: NGXLogger) {
+	constructor(router: Router, viewNextService: ViewNextService, deleteService: DeleteService) {
 		this.contact = <Contact>router.getCurrentNavigation()?.extras.state;
-		this.bodyParserService = bodyParserService;
+		this.viewNextService = viewNextService;
+		this.deleteService = deleteService;
 	}
 
 	viewNext() {
@@ -30,21 +32,13 @@ export class AdminComponent {
 
 		if (this.contact.id == -1) return;
 
-		this.http.post<Contact>(this.apiViewNext, this.contact.id, {
-			observe: 'response',
-			withCredentials: true
-		}).pipe(map((res: HttpResponse<Contact>) => {
-					this.contact = this.bodyParserService.processResponseBody(res);
-					this.logger.info('View-next successful ' + res.status);
-				}
-			), catchError((error: HttpErrorResponse) => {
-				return throwError(() => new Error(error.status.toString()));
-			})
-		).subscribe({
-			error: (error) => {
-				this.logger.error('View-next error: ' + error);
+		this.viewNextService.viewNext(this.contact.id).subscribe({
+			next: (data) => {
+				this.contact = this.viewNextService.getContact();
+			},
+			error: (err) => {
 			}
-		})
+		});
 	}
 
 	delete() {
@@ -55,20 +49,12 @@ export class AdminComponent {
 		if (this.contact.id == -1)
 			return;
 
-		this.http.post<Contact>(this.apiDelete, this.contact.id, {
-			observe: 'response',
-			withCredentials: true
-		}).pipe(map((res: HttpResponse<Contact>) => {
-					this.contact = this.bodyParserService.processResponseBody(res);
-					this.logger.info('Delete successful ' + res.status);
-				}
-			), catchError((error: HttpErrorResponse) => {
-				return throwError(() => new Error(error.status.toString()));
-			})
-		).subscribe({
-			error: (error) => {
-				this.logger.error('Delete error: ' + error);
+		this.deleteService.delete(this.contact.id).subscribe({
+			next: (data) => {
+				this.contact = this.deleteService.getContact();
+			},
+			error: (err) => {
 			}
-		})
+		});
 	}
 }

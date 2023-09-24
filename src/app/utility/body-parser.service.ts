@@ -1,6 +1,6 @@
 import {HttpResponse} from "@angular/common/http";
 import { Injectable } from '@angular/core';
-import {Contact} from "./contact";
+import {Contact} from "../admin/dto/contact";
 
 @Injectable()
 export class BodyParserService {

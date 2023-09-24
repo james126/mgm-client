@@ -1,32 +1,28 @@
-import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
+
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {NGXLogger} from "ngx-logger";
-import {catchError, map, throwError} from "rxjs";
-import {environment} from "../../environments/environment";
-import {BodyParserService} from "../http/body-parser.service";
-import {Contact} from "../http/contact";
-import {Login} from "./login";
+import {Contact} from "../admin/dto/contact";
+import {Login} from "./dto/login";
+import {LoginService} from "./service/login.service";
 
 @Component({
-	selector: 'app-login',
+	selector: 'mgm-login',
 	templateUrl: './login.component.html',
-	styleUrls: ['./login.component.css'],
+	providers: [LoginService]
 })
 export class LoginComponent implements OnInit {
-	private apiLogin = environment.apiLogin;
 	router: Router;
 	loginForm!: FormGroup;
 	formValues = {username: '', password: ''};
 	submitted: boolean = false;
 	invalidCredentials: boolean = false;
 	contact!: Contact
-	bodyParserService: BodyParserService
+	service: LoginService
 
-	constructor(router: Router, private http: HttpClient, bodyParserService: BodyParserService, private logger: NGXLogger) {
+	constructor(router: Router, service: LoginService) {
 		this.router = router;
-		this.bodyParserService = bodyParserService;
+		this.service = service;
 	}
 
 	ngOnInit(): void {
@@ -60,24 +56,15 @@ export class LoginComponent implements OnInit {
 			const password: string = this.loginForm.get('password')!.value;
 			const login = new Login(username, password);
 
-			this.http.post<Contact>(this.apiLogin, login, {
-				observe: 'response',
-				withCredentials: true
-			}).pipe(map((res: HttpResponse<Contact>) => {
-					this.contact = this.bodyParserService.processResponseBody(res);
-					this.logger.info('Login successful ' + res.status);
-					this.router.navigateByUrl('/admin', { state : this.contact});
-					}
-				), catchError((error: HttpErrorResponse) => {
-					return throwError(() => new Error(error.status.toString()));
-				})
-			).subscribe({
-					error: (error) => {
-					console.log('Login unsuccessful: ' + error);
+			this.service.submitLogin(login).subscribe({
+				next: (data) => {
+					this.contact = this.service.getContact();
+					this.router.navigate(['/admin'], { state : this.contact, skipLocationChange: true});
+				}, error: (error) => {
 					this.submitted = true;
 					this.invalidCredentials = true;
 				}
-			})
+			});
 		}
 	}
 

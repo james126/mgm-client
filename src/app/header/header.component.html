@@ -1,44 +1,44 @@
 <!-- Header Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
-	<div [ngClass]="title.slice(0,5)=='admin' ? 'navbar-brand d-flex align-items-center px-4 px-lg-5k' : 'navbar-brand d-flex align-items-center border-end px-4 px-lg-5'">
-        <img src="/assets/image/man.png" class="d-inline-block align-top logo" alt="">
-        <h2 class="m-0"><i class="text-primary me-2"></i>MGM</h2>
-    </div>
-    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+	<div
+		[ngClass]="getLogoClass()">
+		<img src="/assets/image/man.png" class="d-inline-block align-top logo" alt="">
+		<h2 class="m-0"><i class="text-primary me-2"></i>MGM</h2>
+	</div>
+	<button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+		<span class="navbar-toggler-icon"></span>
+	</button>
 
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="navbar-nav ms-auto p-4 p-lg-0" id="test-div">
-            <a routerLink="/index" [ngClass]="title.slice(0,5)=='index' ? 'nav-item nav-link active' : 'nav-item nav-link'">Home</a>
-            <a routerLink="/index" fragment="about" class="nav-item nav-link">About</a>
-            <a routerLink="/index" fragment="services" class="nav-item nav-link">Services</a>
-            <a routerLink="/index" fragment="contact" class="nav-item nav-link">Contact</a>
-            <a routerLink="/login" [ngClass]="title.slice(0,5)=='index' ? 'nav-item nav-link' : 'nav-item nav-link active'"
-            [innerText]="title.slice(0,5)=='index' || title=='login' ? 'Login' : 'Logged In'"></a>
-        </div>
+	<div class="collapse navbar-collapse" id="navbarCollapse">
 
-        <!-- Far right header button -->
-        <div *ngIf="title.slice(0,5) == 'index' || title == 'login'; else logged_in">
+		<div class="navbar-nav ms-auto p-4 p-lg-0" id="test-div">
 			<a routerLink="/index"
-                fragment="contact"
-                class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
-                Get Started
-                <i class="fa fa-arrow-right ms-3">
-                </i>
-            </a>
-        </div>
-        <ng-template #logged_in>
-            <div *ngIf="title.slice(0,5) == 'admin';">
-                <a (click)="logout()"
-                   class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
-                    Log Out
-                    <i class="fa fa-arrow-right ms-3">
-                    </i>
-                </a>
-            </div>
-        </ng-template>
-    </div>
-</nav>
+			   [ngClass]="getHomeClass()"
+				skipLocationChange="true">Home</a>
+			<a routerLink="/index" fragment="about"
+			   [ngClass]="getFragmentClass()" skipLocationChange="true">About</a>
+			<a routerLink="/index" fragment="services"
+			   [ngClass]="getFragmentClass()" skipLocationChange="true">Services</a>
+			<a routerLink="/index" fragment="contact"
+			   [ngClass]="getFragmentClass()" skipLocationChange="true">Contact</a>
+			<a routerLink="/login"
+			   [ngClass]="getLoginClass()" skipLocationChange="true"
+			   [innerText]="getLoginText()"></a>
+		</div>
 
+		<!-- Far right header button -->
+		<div *ngIf="isLoggedOut(); else logged_in">
+			<a routerLink="/index" fragment="contact" skipLocationChange="true" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
+				Get Started
+				<i class="fa fa-arrow-right ms-3"></i>
+			</a>
+		</div>
+		<ng-template #logged_in>
+				<a (click)="logout()" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
+					Log Out
+					<i class="fa fa-arrow-right ms-3"></i>
+				</a>
+		</ng-template>
+	</div>
+</nav>
 <!-- Header End -->
