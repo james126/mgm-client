@@ -19,6 +19,7 @@ Front-end Angular client app
 - [x] Delete form http request to sever and handling
 - [x] Logout functionality
 - [x] Logging to replace console.log statements
+- [x] Lazy loading for LoginModule and AdminModule
 - [ ] unit testing
 - [ ] deploy online
   <br/>
