@@ -1,7 +1,7 @@
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {NGXLogger} from "ngx-logger";
-import {catchError, map, throwError} from "rxjs";
+import {catchError, EMPTY, map, throwError} from "rxjs";
 import {environment} from '../../../environments/environment';
 import {BodyParserService} from "../../utility/body-parser.service";
 import {Contact} from "../dto/contact";
@@ -20,27 +20,17 @@ export class DeleteService {
     return this.contact;
   }
 
-  // options: {
-  // 	headers?: HttpHeaders | {[header: string]: string | string[]},
-  // 	observe?: 'body' | 'events' | 'response',
-  // 	params?: HttpParams|{[param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>},
-  // 	reportProgress?: boolean,
-  // 	responseType?: 'arraybuffer'|'blob'|'json'|'text',
-  // 	withCredentials?: boolean,
-  // }
-  //get an observable of <any>
-
   delete(id?: Number) {
     return this.http.post<Contact>(this.url, id, {
       observe: 'response',
       withCredentials: true
     }).pipe(map((res: HttpResponse<Contact>) => {
               this.contact = this.bodyParserService.processResponseBody(res);
-              console.log('Delete successful ' + res.status);
+              this.logger.log('Delete successful ' + res.status);
             }
         ), catchError((error: HttpErrorResponse) => {
           this.logger.error(error);
-          return throwError(() => new Error(error.status.toString()));
+          return EMPTY;
         })
     )
   }

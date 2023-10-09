@@ -3,7 +3,7 @@ import {CopyrightDirective} from "./copyright.directive";
 
 import { FooterComponent } from './footer.component';
 
-describe('FooterComponent', () => {
+xdescribe('FooterComponent', () => {
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
 

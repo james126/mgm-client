@@ -8,9 +8,10 @@ const routes: Routes = [
 	{path: 'index#about', component: IndexComponent},
 	{path: 'index#services', component: IndexComponent},
 	{path: 'index#contact', component: IndexComponent},
-	//lazy loaded:
+	//lazy loading:
 	{path: 'login', loadChildren: () => import('../login/login.module').then(mod => mod.LoginModule)},
-	{path: 'admin', loadChildren: () => import('../admin/admin.module').then(mod => mod.AdminModule)}
+	{path: 'admin', loadChildren: () => import('../admin/admin.module').then(mod => mod.AdminModule)},
+	{path: 'customer', loadChildren: () => import('../customer//customer.module').then(mod => mod.CustomerModule)},
 ];
 
 @NgModule({

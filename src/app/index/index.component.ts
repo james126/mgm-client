@@ -52,31 +52,41 @@ export class IndexComponent implements OnInit {
 			first_name: new FormControl(this.formValues.first_name, [
 				Validators.required,
 				Validators.minLength(1),
+				Validators.maxLength(30),
+				Validators.pattern('[^ ]+'),
 			]),
 			last_name: new FormControl(this.formValues.last_name, [
 				Validators.required,
 				Validators.minLength(1),
+				Validators.maxLength(30),
+				Validators.pattern('[^ ]+'),
 			]),
 			email: new FormControl(this.formValues.email, [
 				Validators.required,
 				Validators.minLength(1),
-				Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
+				Validators.maxLength(30),
+				Validators.email
 			]),
 			phone: new FormControl(this.formValues.phone, [
 				Validators.required,
-				Validators.minLength(3),
+				Validators.minLength(1),
+				Validators.maxLength(30),
+				Validators.pattern('[^ ]+'),
 			]),
 			address_line1: new FormControl(this.formValues.address_line1, [
 				Validators.required,
 				Validators.minLength(1),
+				Validators.maxLength(100),
 			]),
 			address_line2: new FormControl(this.formValues.address_line2, [
 				Validators.required,
 				Validators.minLength(1),
+				Validators.maxLength(100),
 			]),
 			message: new FormControl(this.formValues.message, [
 				Validators.required,
 				Validators.minLength(1),
+				Validators.maxLength(1000),
 			])
 		});
 	}
@@ -110,7 +120,7 @@ export class IndexComponent implements OnInit {
 	resetForm() {
 		this.contactForm.reset();
 		this.submitted = false;
-		this.router.navigate(['/index'], { skipLocationChange: true }).catch(err => {console.log(err)});
+		this.router.navigate(['/index'], { skipLocationChange: true });
 	}
 
 	get first_name() {

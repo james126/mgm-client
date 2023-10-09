@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {AdminModule} from "../admin/admin.module";
 import {AppRoutingModule} from "../app-routing.module";
+import {CustomerModule} from "../customer/customer.module";
 import {LoginRoutingModule} from "../login/login.routing.module";
 import {HeaderComponent} from "./header.component";
 import {LoginModule} from "../login/login.module";
@@ -17,7 +18,8 @@ import {LogoutService} from "./service/logout.service";
 		IndexModule,
 		AppRoutingModule,
 		LoginModule,
-		AdminModule
+		AdminModule,
+		CustomerModule
 	],
 	providers: [LogoutService]
 })

@@ -29,11 +29,15 @@ export class LoginComponent implements OnInit {
 		this.loginForm = new FormGroup({
 			username: new FormControl(this.formValues.username, [
 				Validators.required,
-				Validators.minLength(1),
+				Validators.minLength(3),
+				Validators.maxLength(30),
+				Validators.pattern('[^ ]+'), //no whitespace
 			]),
 			password: new FormControl(this.formValues.password, [
 				Validators.required,
-				Validators.minLength(1),
+				Validators.minLength(3),
+				Validators.maxLength(30),
+				Validators.pattern('[^ ]+'),
 			])
 		});
 	}

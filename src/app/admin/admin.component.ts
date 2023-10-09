@@ -35,8 +35,6 @@ export class AdminComponent {
 		this.viewNextService.viewNext(this.contact.id).subscribe({
 			next: (data) => {
 				this.contact = this.viewNextService.getContact();
-			},
-			error: (err) => {
 			}
 		});
 	}
@@ -52,8 +50,6 @@ export class AdminComponent {
 		this.deleteService.delete(this.contact.id).subscribe({
 			next: (data) => {
 				this.contact = this.deleteService.getContact();
-			},
-			error: (err) => {
 			}
 		});
 	}
