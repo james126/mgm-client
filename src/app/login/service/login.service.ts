@@ -10,7 +10,7 @@ import {Contact} from "../dto/contact";
 @Injectable()
 export class LoginService {
 	url = environment.apiLogin;
-    contact!: Contact
+    contact?: Contact
     bodyParserService: BodyParserService
 
     constructor(private http: HttpClient, private logger: NGXLogger, bodyParserService: BodyParserService) {

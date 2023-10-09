@@ -1,11 +1,12 @@
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {AdminModule} from "../admin/admin.module";
+import {AppRoutingModule} from "../app-routing.module";
+import {LoginRoutingModule} from "../login/login.routing.module";
 import {HeaderComponent} from "./header.component";
-import {HeaderRoutingModule} from "./header.routing.module";
 import {LoginModule} from "../login/login.module";
 import {IndexModule} from "../index/index.module";
-import {RouterOutlet} from "@angular/router";
 import {LogoutService} from "./service/logout.service";
 
 @NgModule({
@@ -13,10 +14,10 @@ import {LogoutService} from "./service/logout.service";
 	exports: [HeaderComponent],
 	imports: [
 		CommonModule,
-		HeaderRoutingModule,
 		IndexModule,
+		AppRoutingModule,
 		LoginModule,
-		RouterOutlet
+		AdminModule
 	],
 	providers: [LogoutService]
 })

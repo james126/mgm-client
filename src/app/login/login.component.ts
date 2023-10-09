@@ -58,8 +58,7 @@ export class LoginComponent implements OnInit {
 
 			this.service.submitLogin(login).subscribe({
 				next: (data) => {
-					this.contact = this.service.getContact();
-					this.router.navigate(['/admin'], { state : this.contact, skipLocationChange: true});
+					this.router.navigate(['/admin'], { state : this.service.getContact(), skipLocationChange: true});
 				}, error: (error) => {
 					this.submitted = true;
 					this.invalidCredentials = true;

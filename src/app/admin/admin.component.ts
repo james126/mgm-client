@@ -12,7 +12,7 @@ import {ViewNextService} from "./service/view-next.service";
 			border-right: none !important;
 		}`
 	],
-	providers: [ViewNextService, DeleteService]
+	providers: [ViewNextService, {provide: DeleteService, useClass: DeleteService}]
 })
 export class AdminComponent {
 	contact: Contact

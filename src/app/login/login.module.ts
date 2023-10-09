@@ -4,6 +4,7 @@ import {RouterLink} from "@angular/router";
 import {BodyParserService} from "../utility/body-parser.service";
 import {LoginComponent} from "./login.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {LoginRoutingModule} from "./login.routing.module";
 
 @NgModule({
 	declarations: [
@@ -13,7 +14,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 		CommonModule,
 		FormsModule,
 		RouterLink,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		LoginRoutingModule
 	],
 	exports: [
 		LoginComponent
