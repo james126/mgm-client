@@ -1,26 +1,29 @@
-import {HttpHeaders} from "@angular/common/http";
+import {HttpHeaders, HttpResponse} from "@angular/common/http";
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import { TestBed } from '@angular/core/testing';
+import {NGXLogger} from "ngx-logger";
+import {NGXLoggerMock} from "ngx-logger/testing";
 import {environment} from "../../../environments/environment";
 import {Contact} from "../dto/contact";
 
 import { ContactFormService } from './contact-form.service';
 
-xdescribe('ContactFormService', () => {
-	let httpTestingController: HttpTestingController;
-	let service: ContactFormService;
+describe('ContactFormService', () => {
+	let submitService: ContactFormService;
+	let httpMock: HttpTestingController;
+	let url = environment.apiForm;
 	let contact: Contact
-    let url = environment.apiForm;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
 		imports: [HttpClientTestingModule],
-		providers: [ContactFormService]
+		providers: [ContactFormService, {provide: NGXLogger, useClass: NGXLoggerMock}]
 	});
-    service = TestBed.inject(ContactFormService);
 
-	httpTestingController = TestBed.inject(HttpTestingController);
-	const contact = new Contact();
+	submitService = TestBed.inject(ContactFormService);
+	httpMock = TestBed.inject(HttpTestingController);
+
+	  contact = new Contact();
 	  contact.first_name = 'Joe';
 	  contact.last_name = 'Bloggs';
 	  contact.email = 'joe.bloggs@google.com';
@@ -30,14 +33,33 @@ xdescribe('ContactFormService', () => {
 	  contact.message = 'Lawnmowing quote'
   });
 
-  it('should submit contact form', () => {
-    service.submitContactForm(contact).subscribe();
-	  const req = httpTestingController.expectOne(url);
-	  expect(req.request.method).toBe('POST');
-		  expect(req.request.body).toEqual(contact);
+  it('should submit a record', () => {
+
+	  submitService.submitContactForm(contact).subscribe(
+		  res => {
+			  expect(res).toBeUndefined();
+		  }
+	  )
+	  const request = httpMock.expectOne(url);
+	  expect(request.request.method).toBe('POST');
+	  expect(request.request.body).toEqual(contact);
+	  request.flush(contact);
   });
 
+	it('should return an error if request fails', () => {
+		const errorType = 'CANNOT_SUBMIT_CONTACT_FORM' ;
+
+		submitService.submitContactForm(contact).subscribe(
+			res => {},
+			errorResponse => expect(errorResponse.error.type).toEqual(errorType)
+		)
+
+		let request = httpMock.expectOne(url);
+		expect(request.request.method).toBe('POST');
+		request.error(new ProgressEvent("errorType"));
+	});
+
 	afterEach(() => {
-		httpTestingController.verify();
+		httpMock.verify();
 	});
 });

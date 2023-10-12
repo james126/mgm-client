@@ -15,7 +15,7 @@ export class LogoutService {
 			observe: 'response',
 			withCredentials: true
 		}).pipe(map((res: HttpResponse<any>) => {
-					console.log('Logout successful ' + res.status);
+					this.logger.log('Logout successful ' + res.status);
 				}
 			), catchError((error: HttpErrorResponse) => {
 				this.logger.error('Logout error: ' + error);

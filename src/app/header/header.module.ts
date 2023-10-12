@@ -16,10 +16,7 @@ import {LogoutService} from "./service/logout.service";
 	imports: [
 		CommonModule,
 		IndexModule,
-		AppRoutingModule,
-		LoginModule,
-		AdminModule,
-		CustomerModule
+		AppRoutingModule
 	],
 	providers: [LogoutService]
 })

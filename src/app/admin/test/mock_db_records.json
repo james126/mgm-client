@@ -1,52 +1,10 @@
-[
-	{
-		"id": 1,
-		"first_name": "Sala",
-		"last_name": "Foley",
-		"email": "niko.boyle13@hotmail.com",
-		"phone": 913583933,
-		"address_line1": "40 Prestige Place",
-		"address_line2": "Milford",
-		"message": "Lawn mowing quote"
-	},
-	{
-		"id": 2,
-		"first_name": "Anoushka",
-		"last_name": "Curtis",
-		"email": "zion_carroll0@hotmail.com",
-		"phone": 699536123,
-		"address_line1": "206 Mahuhu Crescent",
-		"address_line2": "Grafton",
-		"message": "Garden tidy up"
-	},
-	{
-		"id": 3,
-		"first_name": "Alivia",
-		"last_name": "Pace",
-		"email": "trent.watsica@yahoo.com",
-		"phone": 520363291,
-		"address_line1": "47 Tatau Way",
-		"address_line2": "Te Atatu South",
-		"message": "Gutter cleaning quote"
-	},
-	{
-		"id": 4,
-		"first_name": "Keiran",
-		"last_name": "Mayer",
-		"email": "dejon_konopelski@yahoo.com",
-		"phone": 263424575,
-		"address_line1": "240 Corfield Way",
-		"address_line2": "Golflands",
-		"message": "Water blasting driveway"
-	},
-	{
-		"id": 5,
-		"first_name": "Emmie",
-		"last_name": "Dunn",
-		"email": "wilhelmine98@hotmail.com",
-		"phone": 452962931,
-		"address_line1": "30 Willow Way",
-		"address_line2": "Pakuranga Heights",
-		"message": "Planting shrubs"
-	}
-]
+{
+	"id": 2,
+	"first_name": "Anoushka",
+	"last_name": "Curtis",
+	"email": "zion_carroll0@hotmail.com",
+	"phone": "699536123",
+	"address_line1": "206 Mahuhu Crescent",
+	"address_line2": "Grafton",
+	"message": "Garden tidy up"
+}

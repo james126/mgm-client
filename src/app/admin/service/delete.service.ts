@@ -1,7 +1,7 @@
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {NGXLogger} from "ngx-logger";
-import {catchError, EMPTY, map, throwError} from "rxjs";
+import {catchError, EMPTY, map} from "rxjs";
 import {environment} from '../../../environments/environment';
 import {BodyParserService} from "../../utility/body-parser.service";
 import {Contact} from "../dto/contact";

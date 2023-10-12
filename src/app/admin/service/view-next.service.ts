@@ -20,23 +20,13 @@ export class ViewNextService {
 		return this.contact;
 	}
 
-	// options: {
-	// 	headers?: HttpHeaders | {[header: string]: string | string[]},
-	// 	observe?: 'body' | 'events' | 'response',
-	// 	params?: HttpParams|{[param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>},
-	// 	reportProgress?: boolean,
-	// 	responseType?: 'arraybuffer'|'blob'|'json'|'text',
-	// 	withCredentials?: boolean,
-	// }
-	//get an observable of <any>
-
 	viewNext(id?: Number) {
 		return this.http.post<Contact>(this.url, id, {
 			observe: 'response',
 			withCredentials: true
 		}).pipe(map((res) => {
 			this.contact = this.bodyParserService.processResponseBody(res);
-			console.log('View-next ' + res.status);
+			this.logger.log('View-next ' + res.status);
 		}), catchError((error: HttpErrorResponse) => {
 			this.logger.error(error);
 			return EMPTY;

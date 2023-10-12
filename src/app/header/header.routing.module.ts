@@ -11,7 +11,7 @@ const routes: Routes = [
 	//lazy loading:
 	{path: 'login', loadChildren: () => import('../login/login.module').then(mod => mod.LoginModule)},
 	{path: 'admin', loadChildren: () => import('../admin/admin.module').then(mod => mod.AdminModule)},
-	{path: 'customer', loadChildren: () => import('../customer//customer.module').then(mod => mod.CustomerModule)},
+	{path: 'customer', loadChildren: () => import('../customer/customer.module').then(mod => mod.CustomerModule)},
 ];
 
 @NgModule({
