@@ -20,6 +20,10 @@ Front-end Angular client app
 - [x] Logout functionality
 - [x] Logging to replace console.log statements
 - [x] Lazy loading for LoginModule and AdminModule
-- [ ] unit testing
-- [ ] deploy online
+- [x] unit testing
+### Deployment
+- [x] ec2 instance
+![](https://geps.dev/progress/50)
+- [ ] domain name routing
+- [ ] SSL/https	
   <br/>
