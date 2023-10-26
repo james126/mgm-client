@@ -23,7 +23,7 @@ Front-end Angular client app
 - [x] unit testing
 ### Deployment
 - [x] ec2 instance
-![](https://geps.dev/progress/50)
-- [ ] domain name routing
-- [ ] SSL/https	
+- [x] nginx web server
+- [ ] nginx reverse proxy
+- [ ] SSL/https/domain routing	
   <br/>
