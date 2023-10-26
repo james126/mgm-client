@@ -23,7 +23,8 @@ Front-end Angular client app
 - [x] unit testing
 ### Deployment
 - [x] ec2 instance
-- [x] nginx web server
-- [ ] nginx reverse proxy
+- [x] install nodejs, npm, nginx
+- [x] nginx web server functionality
+- [ ] nginx reverse proxy functionality
 - [ ] SSL/https/domain routing	
   <br/>
