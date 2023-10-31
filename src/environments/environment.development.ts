@@ -1,7 +1,7 @@
 export const environment = {
 	production: false,
-	apiForm: 'http://localhost:8080/form',
-	apiLogin: 'http://localhost:8080/login',
+	apiForm: 'http://localhost:8080/api/form',
+	apiLogin: 'http://localhost:8080/api/login',
 	apiViewNext: 'http://localhost:8080/admin/view-next',
 	apiDelete: 'http://localhost:8080/admin/delete',
 	apiLogout: 'http://localhost:8080/admin/logout',

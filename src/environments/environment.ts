@@ -1,9 +1,9 @@
 export const environment = {
 	production: true,
-	apiForm: 'http://localhost:8080/form',
-	apiLogin: 'http://localhost:8080/login',
-	apiViewNext: 'http://localhost:8080/admin/view-next',
-	apiDelete: 'http://localhost:8080/admin/delete',
-	apiLogout: 'http://localhost:8080/admin/logout',
-	serverLoggingUrl: 'http://localhost:8080/client-logging',
+	apiForm: 'https://server.mrgrassmaster.com:8443/mr-grass-master-2.2/api/form',
+	apiLogin: 'https://server.mrgrassmaster.com:8443/mr-grass-master-2.2/api/login',
+	apiViewNext: 'https://server.mrgrassmaster.com:8443/mr-grass-master-2.2/admin/view-next',
+	apiDelete: 'https://server.mrgrassmaster.com:8443/mr-grass-master-2.2/admin/delete',
+	apiLogout: 'https://server.mrgrassmaster.com:8443/mr-grass-master-2.2/admin/logout',
+	serverLoggingUrl: 'https://server.mrgrassmaster.com:8443/mr-grass-master-2.2/client-logging'
 };

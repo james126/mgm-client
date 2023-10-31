@@ -81,7 +81,6 @@
 						}
 					},
 					"options": {
-						"host": "ec2-13-236-93-116.ap-southeast-2.compute.amazonaws.com",
 						"port": 80
 					},
 					"defaultConfiguration": "development"
