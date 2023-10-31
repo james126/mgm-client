@@ -32,66 +32,94 @@
 
 
 <!-- Contents start-->
-
 ## Contents
 
 - [Demo](#demo)
 - [Angular](#angular)
 - [Hosting](#hosting)
-- [Dependencies](#dependencies)
-- [Learning interesting stuff](#interesting)
 - [Screenshots](#screenshots)
-- [Backlog](#backlog)
-- [Version](#version)
-
 <!-- Contents end-->
 
 
-<a name="demo"></a>
 
+<a name="demo"></a>
 ## Demo
 
-NB: Currently, cookies must be enabled on the browser for JWT authentication<br>
-[https://mrgrassmaster.com/](https://mrgrassmaster.com/)
+NB: Cookies must be enabled for JWT authentication<br>
+<ul>
+	<li><b>Front-end</b></li>
+		<ul>
+			<li>mgm-client</li>
+			<li>mrgrassmaster.com</li>
+		</ul>
+</ul>
+<ul>
+	<li><b>Back-end</b></li>
+		<ul>
+			<li>mgm-server</li>
+			<li>server.mrgrassmaster.com</li>
+		</ul>
+<br>
+	<li>Both applications run on separate instances</li>
+	<li>The back-end has a postgres database installed locall</li>
+</ul>
+
+[https://mrgrassmaster.com](https://mrgrassmaster.com)
+
+
 
 <a name="angular"></a>
-
 ## Angular details
 
-- *HTTP requests*
-	- Made to mgm-server which is located on a different server (server.mrgrassmaster.com)
-		- data sent in JSON format
-		- catches any errors submitting the request, then sends another request to mgm-server to log error details to file
-		  <br></br>
+<ul>
+	<li><b>Http requests</b></li>
+		<ul>
+			<li>Made to mgm-server which is located on a different server (server.mrgrassmaster.com)</li>
+			<ul>
+				<li>JSON body</li>
+				<li>sends errors to mgm-server for logging</li>
+			</ul>
+		</ul>
+</ul>
 
-- *Index page*
-	- Submits contact form
-		- contains form for customer enquiries
-		- validates and submit form data
-		  <br></br>
+<ul>
+	<li><b>Index page</b></li>
+		<ul>
+			<li>Submits form</li>
+			<ul>
+				<li>contact form for customer enquiries</li>
+			</ul>
+		</ul>
+</ul>
 
-- *Login Page*
-    - Login module is lazy loaded
-    - Submits login request
-		- validates and submits user details
-		- login successful → redirects to admin page and displays content received from http response
-		- login unsuccessful → prompts user to enter correct details
-		  <br></br>
+<ul>
+	<li><b>Login Page</b></li>
+		<ul>
+			<li>module lazy loaded</li>
+			<li>Submits login requests</li>
+			<ul>
+				<li>login successful → to admin page</li>
+				<li>login unsuccessful → prompts user</li>
+			</ul>
+		</ul>
+</ul>
 
-- *Admin Page*
-    - Admin module is lazy loaded
-	- Displays data contact form details recieved from mgm-server
-		- view-next button → submits a request to view the next form
-		- delete button → submits a request to delete this form
-		- logout → logs the user out by overwriting the authenticated JWT token
-		  <br></br>
+<ul>
+	<li><b>Admin Page</b></li>
+		<ul>
+			<li>module lazy loaded</li>
+			<li>Displays mgm-server data</li>
+			<ul>
+				<li>view-next → request to view the next form</li>
+				<li>delete → request to delete this form</li>
+				<li>logout → replaces authenticated JWT cookie with an unauthenticated one</li>
+			</ul>
+		</ul>
+</ul>
 
-- Unit Tests
-	- Mocks http requests and check their method, body and result
-	  <br></br>
+
 
 <a name="hosting"></a>
-
 ## Hosting details
 
 App is served from AWS ec2 virtual instance<br/>
@@ -99,43 +127,58 @@ AWS Route53 routes requests for mrgrassmaster.com
 
 - **ec2 details**
 	- instance type t3a.nano (small and cheap) 
-        - ubuntu
+        - `ubuntu`
 		- 500MB memory
 		- 8GB HDD
 		  <br><br>
-	- install npm, nginx, certbot
-	- add Angular build and SSL certificate files generated using certbot
-	  <br><br>
-	- nginx configuration
-		- server name mrgrassmaster.com
-		- enable ssl
-		- reverse proxy details to enable http requests to mgm-server
-		- ssl certificate and key to reference files added
-		- redirect www.mrgrassmaser to https://mrgrassmaster.com
-		  <br><br>
-	- configure firewall
-        - enable ssh, http, https
+- **Install packages**
+	- npm, `nginx`, certbot
+    <br><br>
+- **Add files**
+	- add Angular build and SSL certificate files
+	<br><br>
+- **nginx configuration**
+	- server name mrgrassmaster.com
+	- enable ssl
+	- reverse proxy to mgm-server
+	- ssl certificate and key
+	- redirect www.mrgrassmaser to https://mrgrassmaster.com
+	<br><br>
+- **Configure firewall**
+    - enable ssh, http, https
 
-## Backlog
 
-- [x] Custom authentication
-- [x] Custom authorisation
-- [x] On login redirect to admin page
-- [x] On login receive JWT cookie
-- [x] On login load server objects into page
-- [x] View next form http request to sever and handling
-- [x] Delete form http request to sever and handling
-- [x] Logout functionality
-- [x] Logging to replace console.log statements
-- [x] Lazy loading for LoginModule and AdminModule
-- [x] Unit testing
-- [ ] Customer login
-- [ ] View customer accounts
 
-### Deployment
+<a name="screenshots"></a>
 
-- [x] ec2 instance
-- [x] install nodejs, npm, nginx
-- [x] nginx web server functionality
-- [x] nginx reverse proxy functionality
-- [x] SSL/https/domain routing
+## Screenshots
+
+### `Login`
+
+[<img src="readme/login.png" width="100%"/>](src/main/resources/readme/login.png)
+<br/><br/>
+
+### `Invalid login`
+
+[<img src="readme/invalid-login.png" width="100%"/>](src/main/resources/readme/invalid-login.png)
+<br/><br/>
+
+### `Admin`
+
+[<img src="readme/admin.png" width="100%"/>](src/main/resources/readme/admin.png)
+<br/><br/>
+
+### `View next contact form`
+
+[<img src="readme/admin-view-next.png" width="100%"/>](src/main/resources/readme/admin-view-next.png)
+<br/><br/>
+
+### `Delete contact form`
+
+[<img src="readme/admin-delete.png" width="100%"/>](src/main/resources/readme/admin-delete.png)
+<br/><br/>
+
+### `All forms deleted`
+
+[<img src="readme/all-deleted.png" width="100%"/>](src/main/resources/readme/admin-delete.png)
+<br/><br/>
