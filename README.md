@@ -33,14 +33,21 @@
 
 <!-- Contents start-->
 ## Contents
-
+- [Description](#desc)
 - [Demo](#demo)
 - [Angular](#angular)
 - [Hosting](#hosting)
 - [Screenshots](#screenshots)
 <!-- Contents end-->
 
-
+<a name="desc"></a>
+## Description
+My first attempt at creating an application with client server architecture as a learning project<br>
+<ul>
+	<li>Client uses Angular</li>
+	<li>Server uses Spring Boot</li>
+ 	<li>Both are hosted on separate ubuntu virtual instances</li>
+</ul>
 
 <a name="demo"></a>
 ## Demo
@@ -61,7 +68,7 @@ NB: Cookies must be enabled for JWT authentication<br>
 		</ul>
 <br>
 	<li>Both applications run on separate instances</li>
-	<li>The back-end has a postgres database installed locall</li>
+	<li>The back-end has a postgres database installed locally</li>
 </ul>
 
 [https://mrgrassmaster.com](https://mrgrassmaster.com)
