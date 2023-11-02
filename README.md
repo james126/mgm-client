@@ -67,7 +67,6 @@ NB: Cookies must be enabled for JWT authentication<br>
 			<li>server.mrgrassmaster.com</li>
 		</ul>
 <br>
-	<li>Both applications run on separate instances</li>
 	<li>The back-end has a postgres database installed locally</li>
 </ul>
 
